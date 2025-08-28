@@ -29,7 +29,7 @@ const LandingHero = () => {
         as="a"
         href="/signup"
       >
-        Create your Kytelink
+        Create your TradLink
       </Button>
       <Link color="gray.500" fontSize="lg" textAlign="center" cursor={'pointer'} href="/login">
         Login
