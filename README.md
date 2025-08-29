@@ -1,4 +1,4 @@
-# Kytelink 🪁
+# TradLink 🪁
 
 a simple, free, and opensource alternative to Linktree.
 

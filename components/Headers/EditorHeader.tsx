@@ -102,7 +102,7 @@ const EditorHeader = ({ user }: { user: TUser | null }) => {
               boxSize="2rem"
               cursor="pointer"
               src="/logo.png"
-              alt="Kytelink Logo"
+              alt="TradLink Logo"
               onClick={() => router.push('/')}
             />
             <Spacer />
