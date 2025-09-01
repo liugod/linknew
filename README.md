@@ -7,16 +7,16 @@ a simple, free, and opensource alternative to Linktree.
 
 ## 🚀 Getting Started
 
-#### Kyte Hosted
+#### TradLink Hosted
 
-- Head to [kytelink.com](https://kytelink.com)
+- Head to [tradlink.com](https://tradlink.com)
 - Hit the `Get Started` button
 - Sign up with Github, Google, or Email
 - Follow the onboarding steps to create your first link
 
 #### Self Hosted
 
-- Clone the [kytelink repo](httsp://github.com/aleemrehmtulla/kytelink) and run `npm install`
+- Clone the [tradlink repo](httsp://github.com/aleemrehmtulla/kytelink) and run `npm install`
 - Follow the `.env.example` file to create your own `.env` file
 - Set up your database by running `npx prisma migrate dev --name init` and `npx prisma generate`
 - Run `npm run dev` to start the development server
@@ -48,6 +48,6 @@ When setting it up, all environment variables are optional at build-time, but re
 
 <br />
 
-**kytelink is completely free for all features**
+**tradlink is completely free for all features**
 
 **if you end up using it, consider tossing a star ⭐**

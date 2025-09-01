@@ -80,10 +80,10 @@ const EditUsername = ({ user, setUser }: { user: TUser; setUser: (user: TUser) =
 
   return (
     <VStack pr={{ base: 0, md: '30%' }} align="left" spacing={2}>
-      <Text fontWeight="semibold">Kyte Username</Text>
+      <Text fontWeight="semibold">Profile Username</Text>
       <Box>
         <InputGroup size="sm">
-          <InputLeftAddon children="kytelink.com/" />
+          <InputLeftAddon children="tradlink.com/" />
           <Input
             _hover={{
               bg: 'gray.100',
