@@ -23,7 +23,10 @@ const Home = () => {
       <NextSeo
         title="TradLink - Simple & Free Link-In-Bio"
         description="TradLink is an opensource Linktree alternative that allows you to share all your links in one place. Add custom domains, view click statistics and more."
+
+
         canonical="https://tradlink.com"
+
       />
 
       <VStack
