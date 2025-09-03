@@ -1,6 +1,6 @@
 export const HOSTS = [
-  'tradlink.com',
-  'www.tradlink.com',
+  'link.bigai.app',
+  'link.bigai.app',
   'staging.tradlink.com',
   'www.staging.tradlink.com',
   'localhost:3000',
