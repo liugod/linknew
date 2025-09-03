@@ -18,6 +18,12 @@ This feature adds a secure SQL query interface for database administration.
 
 2. **Access**: Navigate to `/admin/sql` when logged in with an admin account
 
+## Troubleshooting
+
+**Issue**: Accessing `/admin/sql` redirects to homepage
+- **Solution**: Ensure you're accessing the admin panel on the main application domain (not a custom domain)
+- **Note**: Admin routes are protected by middleware and only work on the primary application domains
+
 ## Security
 
 - All SQL commands are permitted for administrators
