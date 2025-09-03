@@ -9,18 +9,37 @@ const LOOPS_API_KEY = process.env.LOOPS_API_KEY
 export const sendMagicLink = async (email: string, link: string) => {
   const TRANSACTIONAL_ID = 'cllzh85eg01b9k30pww3y5giy'
 
-  await fetch(TRANSACTIONAL_URL, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${LOOPS_API_KEY}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      transactionalId: TRANSACTIONAL_ID,
-      email: email,
-      dataVariables: { MagicLink: link },
-    }),
-  })
+  // Check if LOOPS_API_KEY is configured
+  if (!LOOPS_API_KEY) {
+    const error = 'LOOPS_API_KEY environment variable is not set'
+    console.error('Email sending failed:', error)
+    throw new Error(error)
+  }
 
-  console.log('sent magic link')
+  try {
+    const response = await fetch(TRANSACTIONAL_URL, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${LOOPS_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        transactionalId: TRANSACTIONAL_ID,
+        email: email,
+        dataVariables: { MagicLink: link },
+      }),
+    })
+
+    if (!response.ok) {
+      const errorText = await response.text()
+      const error = `Email API request failed: ${response.status} ${response.statusText} - ${errorText}`
+      console.error('Email sending failed:', error)
+      throw new Error(error)
+    }
+
+    console.log('Successfully sent magic link to:', email)
+  } catch (error) {
+    console.error('Email sending failed:', error)
+    throw error
+  }
 }
