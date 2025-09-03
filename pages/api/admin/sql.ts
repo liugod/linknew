@@ -8,6 +8,7 @@ type SqlExecutionResult = {
   rowsAffected?: number
   error?: string
   query?: string
+  operationType?: 'SELECT' | 'MODIFY'
 }
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<SqlExecutionResult>) => {
@@ -42,25 +43,22 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<SqlExecutionRes
       return res.status(400).json({ success: false, error: 'Empty query provided' })
     }
 
-    // Security: Block dangerous operations
-    const upperQuery = trimmedQuery.toUpperCase()
-
-    // Allow only SELECT statements for safety
-    if (!upperQuery.startsWith('SELECT')) {
-      return res.status(400).json({
-        success: false,
-        error: 'Only SELECT queries are allowed for security reasons',
-      })
-    }
+    // Note: All SQL commands are allowed for admin users
+    // Admin authentication and logging provide security controls
 
     // Execute the query using Prisma's raw query capability
     const result = await prisma.$queryRawUnsafe(trimmedQuery)
 
+    // Handle different types of SQL operations
+    const isSelectQuery = trimmedQuery.toUpperCase().trim().startsWith('SELECT')
+    const resultData = Array.isArray(result) ? result : [result]
+    
     return res.status(200).json({
       success: true,
-      data: Array.isArray(result) ? result : [result],
-      rowsAffected: Array.isArray(result) ? result.length : 1,
+      data: isSelectQuery ? resultData : [],
+      rowsAffected: Array.isArray(result) ? result.length : (typeof result === 'number' ? result : 1),
       query: trimmedQuery,
+      operationType: isSelectQuery ? 'SELECT' : 'MODIFY',
     })
   } catch (error: any) {
     console.error('SQL execution error:', error)
