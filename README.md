@@ -23,6 +23,8 @@ a simple, free, and opensource alternative to Linktree.
 
 When setting it up, all environment variables are optional at build-time, but required througout usage. For example, if you don't want to include Github or Google authentication, you can leave those variables blank. However, if you try to use them, it will throw an error.
 
+**Email Configuration**: TradLink uses SMTP for sending magic link authentication emails. Configure the `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`, and `SMTP_FROM` environment variables to enable email authentication. This works with any SMTP provider like Gmail, SendGrid, Mailgun, etc.
+
 ## 📝 Features
 
 - [x] Customizable links and icons
