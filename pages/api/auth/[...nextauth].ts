@@ -59,7 +59,8 @@ export const authOptions: NextAuthOptions = {
       })
 
       if (!exisitngUser) {
-        throw new Error('New account creation is disabled.')
+        // Allow new user creation
+        return true
       }
 
       if (exisitngUser) {
@@ -110,7 +111,6 @@ export const authOptions: NextAuthOptions = {
       }
     },
     createUser: async ({ user }) => {
-      return
       await prisma.kyteDraft.create({
         data: {
           userId: user.id,
