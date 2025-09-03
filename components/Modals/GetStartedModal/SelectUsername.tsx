@@ -1,7 +1,7 @@
 import { HStack, Input, Text, VStack } from '@chakra-ui/react'
-import { TUser } from 'types/user'
-import { useState, useCallback, useEffect } from 'react'
 import { debounce } from 'lodash'
+import { useCallback, useEffect, useState } from 'react'
+import { TUser } from 'types/user'
 
 type SelectUsernameProps = {
   user: TUser

@@ -2,9 +2,8 @@
 // feel free to remove the captures in trackServerEvent and trackClientEvent
 // if you don't, you need to fill in your .env with credentials from posthog.com
 import { PosthogEvents } from 'consts/posthog'
-import { PostHog } from 'posthog-node'
 import posthog from 'posthog-js'
-
+import { PostHog } from 'posthog-node'
 import { TUser } from 'types/user'
 
 const posthogServer = process.env.NEXT_PUBLIC_POSTHOG_KEY
@@ -22,7 +21,7 @@ export function trackServerEvent({ event, id, user, properties }: trackingProps)
       event: event,
       properties: { ...user, ...properties },
     })
-    
+
     console.log(`[SERVER POSTHOG] ${event}`)
   } else {
     console.log(`[NO POSTHOG SERVER DID NOT TRACK] ${event}`)

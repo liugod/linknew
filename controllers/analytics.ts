@@ -1,9 +1,8 @@
-import prisma from 'lib/prisma'
-import { Device } from 'types/utils'
-
+import { PosthogEvents } from 'consts/posthog'
 import { addDays, format } from 'date-fns'
 import { trackServerEvent } from 'lib/posthog'
-import { PosthogEvents } from 'consts/posthog'
+import prisma from 'lib/prisma'
+import { Device } from 'types/utils'
 
 type TPageHit = {
   kyteId: string

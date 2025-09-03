@@ -1,13 +1,12 @@
 import { Modal, ModalBody, ModalContent, ModalOverlay, useToast } from '@chakra-ui/react'
 import { Box, Button, Heading, Text, VStack } from '@chakra-ui/react'
-
+import { useState } from 'react'
+import { FaArrowRight } from 'react-icons/fa'
 import { TUser } from 'types/user'
 
-import SelectUsername from './SelectUsername'
-import { FaArrowRight } from 'react-icons/fa'
-import StarterLinks from './StarterLinks'
 import NameDescription from './NameDescription'
-import { useState } from 'react'
+import SelectUsername from './SelectUsername'
+import StarterLinks from './StarterLinks'
 
 type GetStartedModalProps = {
   modalOpen: boolean

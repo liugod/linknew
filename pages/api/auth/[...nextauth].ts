@@ -1,14 +1,14 @@
+import { PrismaAdapter } from '@auth/prisma-adapter'
+import { PosthogEvents } from 'consts/posthog'
+import { sendMagicLink } from 'controllers/emails'
+import { trackServerEvent } from 'lib/posthog'
 import prisma from 'lib/prisma'
-import NextAuth from 'next-auth'
+import { cleanPrismaData } from 'lib/utils'
 import type { NextAuthOptions } from 'next-auth'
-import GoogleProvider from 'next-auth/providers/google'
+import NextAuth from 'next-auth'
 import EmailProvider from 'next-auth/providers/email'
 import GitHubProvider from 'next-auth/providers/github'
-import { PrismaAdapter } from '@auth/prisma-adapter'
-import { trackServerEvent } from 'lib/posthog'
-import { PosthogEvents } from 'consts/posthog'
-import { cleanPrismaData } from 'lib/utils'
-import { sendMagicLink } from 'controllers/emails'
+import GoogleProvider from 'next-auth/providers/google'
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma) as any,

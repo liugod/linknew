@@ -1,24 +1,22 @@
 // headsup -- nuked VCFs from here
 // rmed in july 7th 2023 commit
-import { useEffect, useState } from 'react'
-
 import {
+  Box,
   Button,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
-  VStack,
   Input,
   InputGroup,
-  Text,
-  Link,
-  Box,
   InputLeftAddon,
+  Link,
+  ModalBody,
+  ModalCloseButton,
+  ModalFooter,
+  ModalHeader,
+  Text,
   useToast,
+  VStack,
 } from '@chakra-ui/react'
+import { useEffect, useState } from 'react'
 import { FaArrowLeft } from 'react-icons/fa'
-
 import { TUser } from 'types/user'
 
 type AddIconModalProps = {

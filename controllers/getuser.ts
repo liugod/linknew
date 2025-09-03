@@ -1,10 +1,10 @@
 import prisma from 'lib/prisma'
-import { NextApiRequest, NextApiResponse } from 'next'
-import { getSession } from 'next-auth/react'
-import { TUser } from 'types/user'
 import { cleanPrismaData } from 'lib/utils'
-import { authOptions } from 'pages/api/auth/[...nextauth]'
+import { NextApiRequest, NextApiResponse } from 'next'
 import { getServerSession } from 'next-auth'
+import { getSession } from 'next-auth/react'
+import { authOptions } from 'pages/api/auth/[...nextauth]'
+import { TUser } from 'types/user'
 
 // inspired by supabase :)
 export type TUserRes = {

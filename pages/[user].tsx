@@ -1,13 +1,12 @@
+import { Box, Heading, Icon, Link, Text, VStack } from '@chakra-ui/react'
+import User from 'components/Kyte'
+import { AddPageHit } from 'controllers/analytics'
 import { getUserFromUsername } from 'controllers/getuser'
+import { getDeviceType } from 'lib/utils'
 import type { GetServerSideProps } from 'next'
 import { NextSeo } from 'next-seo'
-import { getDeviceType } from 'lib/utils'
-
-import User from 'components/Kyte'
-import { TUser } from 'types/user'
-import { AddPageHit } from 'controllers/analytics'
-import { Icon, Heading, VStack, Link, Text, Box } from '@chakra-ui/react'
 import { FaExclamationTriangle } from 'react-icons/fa'
+import { TUser } from 'types/user'
 
 const Kyte = (user: TUser) => {
   if (user.banned) {
@@ -15,9 +14,10 @@ const Kyte = (user: TUser) => {
       <>
         <NextSeo
           title={user.seoTitle || `${user.name || user.username} | TradLink`}
-          description={user.seoDescription || `Check out ${user.name}'s profile to grab their links!`}
+          description={
+            user.seoDescription || `Check out ${user.name}'s profile to grab their links!`
+          }
           canonical={`https://tradlink.com/${user.username}`}
-
         />
         <Box
           p={[4, 6, 8, 10]}
@@ -69,7 +69,6 @@ const Kyte = (user: TUser) => {
         title={user.seoTitle || `${user.name || user.username} | TradLink`}
         description={user.seoDescription || `Check out ${user.name}'s profile to grab their links!`}
         canonical={`https://tradlink.com/${user.username}`}
-
       />
       <User user={user} />
     </>

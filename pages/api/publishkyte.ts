@@ -1,7 +1,6 @@
-import { NextApiRequest, NextApiResponse } from 'next'
-
 import { syncDraftToProd } from 'controllers/editkyte'
 import { getUserFromNextAuth } from 'controllers/getuser'
+import { NextApiRequest, NextApiResponse } from 'next'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { user, error } = await getUserFromNextAuth(req, res)

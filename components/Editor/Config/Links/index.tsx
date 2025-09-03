@@ -1,5 +1,4 @@
 import { VStack } from '@chakra-ui/react'
-
 import { TUser } from 'types/user'
 
 import AddIcons from './AddIcons'

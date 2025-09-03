@@ -1,18 +1,15 @@
 // @ts-nocheck
-import { useContext, useEffect, useState } from 'react'
-
-import { useRouter } from 'next/router'
-
-import EditorHeader from 'components/Headers/EditorHeader'
 import LoadingScreen from 'components/Auth/LoadingScreen'
-
-import { TKyteProdContext, TUserContext } from 'types/user'
-import { KyteProdContext, UserContext } from 'pages/_app'
 import NoUserScreen from 'components/Auth/NoUserScreen'
-import { NextSeo } from 'next-seo'
 import Editor from 'components/Editor'
-import { trackClientEvent } from 'lib/posthog'
+import EditorHeader from 'components/Headers/EditorHeader'
 import { PosthogEvents } from 'consts/posthog'
+import { trackClientEvent } from 'lib/posthog'
+import { useRouter } from 'next/router'
+import { NextSeo } from 'next-seo'
+import { KyteProdContext, UserContext } from 'pages/_app'
+import { useContext, useEffect, useState } from 'react'
+import { TKyteProdContext, TUserContext } from 'types/user'
 
 const Edit = () => {
   const { user, setUser } = useContext(UserContext) as TUserContext
