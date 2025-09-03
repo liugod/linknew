@@ -33,6 +33,7 @@ type SqlResult = {
   rowsAffected?: number
   error?: string
   query?: string
+  operationType?: 'SELECT' | 'MODIFY'
 }
 
 const SqlAdminPage = () => {
@@ -78,9 +79,13 @@ const SqlAdminPage = () => {
       setResult(data)
 
       if (data.success) {
+        const message = data.operationType === 'SELECT' 
+          ? `${data.rowsAffected} rows returned`
+          : `${data.rowsAffected} rows affected`
+        
         toast({
           title: 'Query executed successfully',
-          description: `${data.rowsAffected} rows returned`,
+          description: message,
           status: 'success',
           duration: 3000,
           isClosable: true,
@@ -137,8 +142,8 @@ const SqlAdminPage = () => {
               SQL Admin Panel
             </Heading>
             <Text color="gray.600">
-              Execute SQL queries directly against the database. Only SELECT queries are allowed for
-              security.
+              Execute SQL queries directly against the database. All SQL commands are allowed for
+              administrators.
             </Text>
           </Box>
 
@@ -147,8 +152,8 @@ const SqlAdminPage = () => {
             <Box>
               <Text fontWeight="bold">Security Notice</Text>
               <Text fontSize="sm">
-                This is a powerful admin tool. Only SELECT queries are permitted. Be careful when
-                querying large datasets as it may impact performance.
+                This is a powerful admin tool with full database access. All SQL commands are
+                permitted. Use with extreme caution as changes may be irreversible.
               </Text>
             </Box>
           </Alert>
@@ -160,7 +165,7 @@ const SqlAdminPage = () => {
             <Textarea
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder='Enter your SQL query here... (e.g., SELECT * FROM "User" LIMIT 10)'
+              placeholder='Enter your SQL query here... (e.g., SELECT * FROM "User" LIMIT 10, UPDATE "User" SET name = "New Name" WHERE id = 1)'
               minHeight="150px"
               fontFamily="monospace"
               fontSize="sm"
@@ -245,7 +250,11 @@ const SqlAdminPage = () => {
               ) : (
                 <Alert status="info">
                   <AlertIcon />
-                  <Text>Query executed successfully but returned no results.</Text>
+                  <Text>
+                    {result.operationType === 'SELECT' 
+                      ? 'Query executed successfully but returned no results.'
+                      : 'Query executed successfully.'}
+                  </Text>
                 </Alert>
               )}
             </Box>
