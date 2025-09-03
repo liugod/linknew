@@ -9,18 +9,37 @@ const LOOPS_API_KEY = process.env.LOOPS_API_KEY
 export const sendMagicLink = async (email: string, link: string) => {
   const TRANSACTIONAL_ID = 'cllzh85eg01b9k30pww3y5giy'
 
-  await fetch(TRANSACTIONAL_URL, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${LOOPS_API_KEY}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      transactionalId: TRANSACTIONAL_ID,
-      email: email,
-      dataVariables: { MagicLink: link },
-    }),
-  })
+  // Check if API key is configured
+  if (!LOOPS_API_KEY) {
+    console.error('LOOPS_API_KEY is not configured. Cannot send magic link email.')
+    throw new Error('Email service not configured')
+  }
 
-  console.log('sent magic link')
+  try {
+    const response = await fetch(TRANSACTIONAL_URL, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${LOOPS_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        transactionalId: TRANSACTIONAL_ID,
+        email: email,
+        dataVariables: { MagicLink: link },
+      }),
+    })
+
+    if (!response.ok) {
+      const errorText = await response.text()
+      console.error(`Failed to send magic link email. Status: ${response.status}, Response: ${errorText}`)
+      throw new Error(`Email sending failed: ${response.status}`)
+    }
+
+    const result = await response.json()
+    console.log('Successfully sent magic link email to:', email)
+    return result
+  } catch (error) {
+    console.error('Error sending magic link email:', error)
+    throw error
+  }
 }
