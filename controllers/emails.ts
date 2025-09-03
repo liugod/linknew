@@ -7,7 +7,7 @@ const TRANSACTIONAL_URL = 'https://app.loops.so/api/v1/transactional'
 const LOOPS_API_KEY = process.env.LOOPS_API_KEY
 
 export const sendMagicLink = async (email: string, link: string) => {
-  const TRANSACTIONAL_ID = 'cllzh85eg01b9k30pww3y5giy'
+  const TRANSACTIONAL_ID = 'cmeo5f3ed0q0s480idbzjnlkz'
 
   // Check if API key is configured
   if (!LOOPS_API_KEY) {
