@@ -8,7 +8,7 @@ import { PrismaAdapter } from '@auth/prisma-adapter'
 import { trackServerEvent } from 'lib/posthog'
 import { PosthogEvents } from 'consts/posthog'
 import { cleanPrismaData } from 'lib/utils'
-import { sendMagicLink } from 'controllers/emails'
+
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma) as any,
@@ -23,24 +23,16 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
     }),
     EmailProvider({
-      // here you have two options: use an http api or setup an smpt server
-      // if you want all dependencies opensource, smpt will be eaiser
-      // otherwise customize what ya want in /controllers/emails.ts
-      // questions? feel free to dm me on twitter @aleemrehmtulla
-
-      // server: {
-      //   host: process.env.SMTP_HOST,
-      //   port: process.env.SMTP_PORT,
-      //   auth: {
-      //     user: process.env.SMTP_USER,
-      //     pass: process.env.SMTP_PASSWORD,
-      //   },
-      // },
-      // from: process.env.SMTP_FROM,
-
-      sendVerificationRequest: async ({ url, identifier: email }) => {
-        return await sendMagicLink(email, url)
+      // Using SMTP server for email sending
+      server: {
+        host: process.env.SMTP_HOST,
+        port: parseInt(process.env.SMTP_PORT || '587'),
+        auth: {
+          user: process.env.SMTP_USER,
+          pass: process.env.SMTP_PASSWORD,
+        },
       },
+      from: process.env.SMTP_FROM,
     }),
   ],
   pages: {
