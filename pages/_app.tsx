@@ -20,7 +20,11 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
   const [kyteProd, setKyteProd] = useState<TUser | null>(null)
 
   const getUserSession = async () => {
-    if (!window.location.pathname.includes(`/edit`)) return
+    if (
+      !window.location.pathname.includes(`/edit`) &&
+      !window.location.pathname.includes(`/admin`)
+    )
+      return
     console.log('%cGetting user session', 'color: white; background-color: black; font-size: 20px')
     const start = new Date().getTime()
     const getuser = await fetch('/api/auth/getuser')
