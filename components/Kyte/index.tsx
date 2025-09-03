@@ -1,7 +1,7 @@
 import { Text, VStack } from '@chakra-ui/react'
-
-import { TUser } from 'types/user'
 import { THEMES } from 'consts/themes'
+import { TUser } from 'types/user'
+
 import Icons from './Icons/Icons'
 import Links from './Links/Links'
 import UserData from './UserData'

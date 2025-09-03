@@ -1,14 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // @ts-ignore - ts doesn't know about the extension.
 
-import { useState } from 'react'
-
 import { Box, useColorModeValue, VStack } from '@chakra-ui/react'
+import { useState } from 'react'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
-
 import { TLink, TUser } from 'types/user'
-import LinkModal from '../LinkModal'
 
+import LinkModal from '../LinkModal'
 import { reorder } from './Helper'
 import Link from './Link'
 

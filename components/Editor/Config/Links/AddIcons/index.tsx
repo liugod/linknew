@@ -1,9 +1,7 @@
-import { useState } from 'react'
-
 import { Heading, VStack } from '@chakra-ui/react'
-
-import { TUser } from 'types/user'
 import ICON_OPTIONS from 'consts/icons'
+import { useState } from 'react'
+import { TUser } from 'types/user'
 
 import Icons from './IconOrder'
 import AddIconModal from './Modal'

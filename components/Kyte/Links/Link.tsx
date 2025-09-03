@@ -1,12 +1,11 @@
-import { MouseEvent } from 'react'
-import { Box, Text, Center, Spacer, Flex, Image } from '@chakra-ui/react'
-import * as icons from 'react-icons/fa'
-
-import { TLink, TUser } from 'types/user'
-import { THEMES } from 'consts/themes'
+import { Box, Center, Flex, Image, Spacer, Text } from '@chakra-ui/react'
 import DynamicIcon from 'components/DynamicIcon'
+import { THEMES } from 'consts/themes'
 import { getDeviceType } from 'lib/utils'
 import { getBaseURL } from 'lib/utils'
+import { MouseEvent } from 'react'
+import * as icons from 'react-icons/fa'
+import { TLink, TUser } from 'types/user'
 
 type LinksProps = { user: TUser; link: TLink; isPreview?: boolean }
 

@@ -1,4 +1,4 @@
-import { VStack, Heading, Text, Stack } from '@chakra-ui/react'
+import { Heading, Stack, Text, VStack } from '@chakra-ui/react'
 import PageViews from 'components/Editor/Config/Analytics/PageViews'
 import TimeSeries from 'components/Editor/Config/Analytics/TimeSeries'
 import TrafficSources from 'components/Editor/Config/Analytics/TrafficSources'

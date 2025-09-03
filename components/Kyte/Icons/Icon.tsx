@@ -1,12 +1,10 @@
-import { MouseEvent } from 'react'
-
 import { Flex } from '@chakra-ui/react'
-
-import { TIcon, FaIconKey } from 'types/user'
+import DynamicIcon from 'components/DynamicIcon'
 import ICON_OPTIONS from 'consts/icons'
 import { THEMES } from 'consts/themes'
-import DynamicIcon from 'components/DynamicIcon'
-import { getDeviceType, getBaseURL } from 'lib/utils'
+import { getBaseURL, getDeviceType } from 'lib/utils'
+import { MouseEvent } from 'react'
+import { FaIconKey, TIcon } from 'types/user'
 
 type LinksProps = { icon: TIcon; theme: string; userId: string; isPreview?: boolean }
 

@@ -1,7 +1,5 @@
+import { Heading, HStack, Input, Switch, Text, VStack } from '@chakra-ui/react'
 import { useEffect } from 'react'
-
-import { Heading, VStack, Text, Input, Switch, HStack } from '@chakra-ui/react'
-
 import { TUser } from 'types/user'
 
 type RedirectProps = {

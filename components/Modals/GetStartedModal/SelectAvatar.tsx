@@ -1,12 +1,10 @@
-import { ChangeEvent, useState } from 'react'
-
 import { Box, Image, Spinner, Text, useToast, VStack } from '@chakra-ui/react'
-
-import { TUser } from 'types/user'
-import { uploadFile } from 'lib/uploadfile'
-import { trackClientEvent } from 'lib/posthog'
 import { PosthogEvents } from 'consts/posthog'
+import { trackClientEvent } from 'lib/posthog'
+import { uploadFile } from 'lib/uploadfile'
+import { ChangeEvent, useState } from 'react'
 import { BiCamera } from 'react-icons/bi'
+import { TUser } from 'types/user'
 
 type GetStartedModalProps = {
   user: TUser
@@ -20,17 +18,61 @@ const SelectAvatar = ({ user, setUser }: GetStartedModalProps) => {
   const uploadImage = async (e: ChangeEvent<HTMLInputElement>) => {
     setLoading(true)
 
-    const { imageURL, blurpfp, error } = await uploadFile(e.target.files![0], true)
+    try {
+      const file = e.target.files?.[0]
+      if (!file) {
+        toast({
+          title: 'Error',
+          description: 'No file selected',
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+        })
+        setLoading(false)
+        return
+      }
 
-    if (imageURL && !error) {
-      setUser({ ...user, pfp: imageURL, blurpfp: blurpfp || '' })
-      trackClientEvent({ event: PosthogEvents.UPDATED_AVATAR, user })
-    } else {
+      // Check file size (limit to 5MB for better Vercel performance)
+      if (file.size > 5 * 1024 * 1024) {
+        toast({
+          title: 'Error',
+          description: 'File size too large. Please select an image under 5MB.',
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+        })
+        setLoading(false)
+        return
+      }
+
+      const { imageURL, blurpfp, error } = await uploadFile(file, true)
+
+      if (imageURL && !error) {
+        setUser({ ...user, pfp: imageURL, blurpfp: blurpfp || '' })
+        trackClientEvent({ event: PosthogEvents.UPDATED_AVATAR, user })
+        toast({
+          title: 'Success',
+          description: 'Avatar uploaded successfully!',
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        })
+      } else {
+        toast({
+          title: 'Upload Failed',
+          description: error || 'Failed to upload avatar. Please try again.',
+          status: 'error',
+          duration: 10000,
+          isClosable: true,
+        })
+      }
+    } catch (error) {
+      console.error('Upload error:', error)
       toast({
-        title: 'Error',
-        description: error,
+        title: 'Upload Failed',
+        description: 'An unexpected error occurred. Please try again.',
         status: 'error',
-        duration: 15000,
+        duration: 10000,
         isClosable: true,
       })
     }

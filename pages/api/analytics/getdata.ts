@@ -1,5 +1,3 @@
-import { NextApiRequest, NextApiResponse } from 'next'
-
 import {
   GetCountryHits,
   GetCountryHitsReturnData,
@@ -13,8 +11,8 @@ import {
   GetTrafficSources,
   GetTrafficSourcesReturnData,
 } from 'controllers/analytics'
-
 import { getUserFromNextAuth } from 'controllers/getuser'
+import { NextApiRequest, NextApiResponse } from 'next'
 
 export type AnalyticAPIReturnData = {
   success?: boolean

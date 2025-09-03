@@ -1,22 +1,20 @@
-import { useState } from 'react'
-
 import {
   Button,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
-  VStack,
   HStack,
-  Text,
-  Spacer,
   Link,
+  ModalBody,
+  ModalCloseButton,
+  ModalFooter,
+  ModalHeader,
+  Spacer,
+  Text,
   useToast,
+  VStack,
 } from '@chakra-ui/react'
-
-import { FaIconKey, TIcon, TUser } from 'types/user'
 import DynamicIcon from 'components/DynamicIcon'
 import ICON_OPTIONS, { TIconOption } from 'consts/icons'
+import { useState } from 'react'
+import { FaIconKey, TIcon, TUser } from 'types/user'
 
 type AddIconModalProps = {
   user: TUser

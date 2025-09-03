@@ -1,26 +1,24 @@
-import { useEffect, useState } from 'react'
-
 import {
-  TableContainer,
-  Table,
-  Thead,
-  Tr,
-  Th,
-  Tbody,
-  Td,
-  VStack,
+  Box,
+  Button,
+  Divider,
   HStack,
   Link,
-  Button,
-  Box,
-  Divider,
-  Text,
   Spacer,
+  Table,
+  TableContainer,
+  Tbody,
+  Td,
+  Text,
+  Th,
+  Thead,
   Tooltip,
+  Tr,
+  VStack,
 } from '@chakra-ui/react'
-import { BiTrash, BiCheckCircle } from 'react-icons/bi'
+import { useEffect, useState } from 'react'
+import { BiCheckCircle, BiTrash } from 'react-icons/bi'
 import { RiErrorWarningLine } from 'react-icons/ri'
-
 import { TUser } from 'types/user'
 
 type RecordTableProps = {

@@ -1,29 +1,27 @@
-import { useCallback, useContext, useEffect, useState } from 'react'
-import { debounce, isEqual, omit } from 'lodash'
-import { signOut } from 'next-auth/react'
-
 import {
-  Spacer,
   Avatar,
-  HStack,
   Container,
-  SimpleGrid,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  Portal,
-  PopoverCloseButton,
-  PopoverBody,
-  Link,
-  VStack,
-  useToast,
+  HStack,
   Image,
+  Link,
+  Popover,
+  PopoverBody,
+  PopoverCloseButton,
+  PopoverContent,
+  PopoverTrigger,
+  Portal,
+  SimpleGrid,
+  Spacer,
+  useToast,
+  VStack,
 } from '@chakra-ui/react'
-
-import { TKyteProdContext, TUser } from 'types/user'
 import ShareKyteModal from 'components/Modals/ShareKyteModal'
-import { KyteProdContext } from 'pages/_app'
+import { debounce, isEqual, omit } from 'lodash'
 import { useRouter } from 'next/router'
+import { signOut } from 'next-auth/react'
+import { KyteProdContext } from 'pages/_app'
+import { useCallback, useContext, useEffect, useState } from 'react'
+import { TKyteProdContext, TUser } from 'types/user'
 
 const EditorHeader = ({ user }: { user: TUser | null }) => {
   const { kyteProd } = useContext(KyteProdContext) as TKyteProdContext

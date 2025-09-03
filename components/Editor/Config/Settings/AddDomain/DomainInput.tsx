@@ -1,7 +1,5 @@
+import { Button, Input, InputGroup, InputLeftAddon, Text, VStack } from '@chakra-ui/react'
 import { useState } from 'react'
-
-import { Button, VStack, Text, Input, InputGroup, InputLeftAddon } from '@chakra-ui/react'
-
 import { TUser } from 'types/user'
 
 type DomainInputProps = {

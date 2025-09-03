@@ -1,8 +1,7 @@
-import { NextApiRequest, NextApiResponse } from 'next'
-import { z } from 'zod'
-
 import { AddPageHit } from 'controllers/analytics'
+import { NextApiRequest, NextApiResponse } from 'next'
 import { Device } from 'types/utils'
+import { z } from 'zod'
 
 const RequestSchema = z.object({
   kyteId: z.string(),

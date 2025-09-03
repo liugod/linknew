@@ -1,5 +1,3 @@
-import { useState, useCallback, ChangeEvent } from 'react'
-
 import {
   Box,
   Button,
@@ -16,16 +14,14 @@ import {
   useToast,
   VStack,
 } from '@chakra-ui/react'
-
+import data from '@emoji-mart/data'
+import DynamicIcon from 'components/DynamicIcon'
+import { uploadFile } from 'lib/uploadfile'
+import { debounce } from 'lodash'
+import { ChangeEvent, useCallback, useState } from 'react'
 import { AiOutlineCloudUpload } from 'react-icons/ai'
 import { FaArrowLeft } from 'react-icons/fa'
-import { debounce } from 'lodash'
-import data from '@emoji-mart/data'
-
 import { FaIconKey, TUser } from 'types/user'
-
-import { uploadFile } from 'lib/uploadfile'
-import DynamicIcon from 'components/DynamicIcon'
 
 const { SearchIndex, init } = require('emoji-mart') //eslint-disable-line
 

@@ -1,11 +1,11 @@
 import 'styles/globals.css'
-import { createContext, ReactElement, ReactNode, useEffect, useState } from 'react'
 
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
+import { initializePostHog } from 'lib/posthog'
 import { NextPage } from 'next'
 import type { AppProps } from 'next/app'
+import { createContext, ReactElement, ReactNode, useEffect, useState } from 'react'
 import { TUser } from 'types/user'
-import { initializePostHog } from 'lib/posthog'
 
 type NextPageWithLayout = NextPage & { getLayout?: (page: ReactElement) => ReactNode }
 type AppPropsWithLayout = AppProps & { Component: NextPageWithLayout }

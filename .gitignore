@@ -33,3 +33,7 @@ yarn-error.log*
 *.tsbuildinfo
 .env
 .vscode/settings.json
+
+# test files
+test-upload.*
+/tmp/
