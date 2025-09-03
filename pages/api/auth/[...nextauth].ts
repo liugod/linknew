@@ -73,22 +73,26 @@ export const authOptions: NextAuthOptions = {
 
         if (exisitngAccount) return true
 
-        await prisma.account.create({
-          data: {
-            id: account.id_token,
-            userId: exisitngUser.id,
-            type: account.type,
-            provider: account.provider,
-            providerAccountId: account.providerAccountId,
-            refresh_token: account.refresh_token,
-            access_token: account.access_token,
-            expires_at: account.expires_at,
-            token_type: account.token_type,
-            scope: account.scope,
-            id_token: account.id_token,
-            session_state: account.session_state,
-          },
-        })
+        try {
+          await prisma.account.create({
+            data: {
+              userId: exisitngUser.id,
+              type: account.type,
+              provider: account.provider,
+              providerAccountId: account.providerAccountId,
+              refresh_token: account.refresh_token,
+              access_token: account.access_token,
+              expires_at: account.expires_at,
+              token_type: account.token_type,
+              scope: account.scope,
+              id_token: account.id_token,
+              session_state: account.session_state,
+            },
+          })
+        } catch (error) {
+          console.error('Error creating account for existing user:', error)
+          return false
+        }
         return true
       }
 
@@ -111,26 +115,41 @@ export const authOptions: NextAuthOptions = {
       }
     },
     createUser: async ({ user }) => {
-      await prisma.kyteDraft.create({
-        data: {
-          userId: user.id,
-          email: user.email,
-        },
-      })
+      try {
+        console.log('CREATE USER EVENT')
+        console.log('Creating user:', user)
 
-      const kyteUser = await prisma.kyteProd
-        .create({
+        await prisma.kyteDraft.create({
           data: {
             userId: user.id,
             email: user.email,
           },
         })
-        .then(cleanPrismaData)
 
-      trackServerEvent({
-        event: PosthogEvents.CREATED_ACCOUNT,
-        user: kyteUser,
-      })
+        const kyteUser = await prisma.kyteProd
+          .create({
+            data: {
+              userId: user.id,
+              email: user.email,
+            },
+          })
+          .then(cleanPrismaData)
+
+        console.log('User created successfully:', kyteUser)
+
+        try {
+          trackServerEvent({
+            event: PosthogEvents.CREATED_ACCOUNT,
+            user: kyteUser,
+          })
+        } catch (trackingError) {
+          console.log('PostHog tracking error:', trackingError)
+          // Don't fail user creation due to tracking errors
+        }
+      } catch (error) {
+        console.error('Error creating user:', error)
+        throw error // Re-throw to prevent incomplete user creation
+      }
     },
   },
 }
