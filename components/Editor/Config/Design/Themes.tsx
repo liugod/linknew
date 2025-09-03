@@ -1,6 +1,5 @@
-import { Box, Heading, SimpleGrid, Image, Text, VStack } from '@chakra-ui/react'
+import { Box, Heading, Image, SimpleGrid, Text, VStack } from '@chakra-ui/react'
 import { THEME_OPTIONS } from 'consts/themes'
-
 import { TUser } from 'types/user'
 
 type ThemesProps = { user: TUser; setUser: (user: TUser) => void }

@@ -1,5 +1,5 @@
-import { NextApiRequest, NextApiResponse } from 'next'
 import prisma from 'lib/prisma'
+import { NextApiRequest, NextApiResponse } from 'next'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const threeDaysAgo = new Date()

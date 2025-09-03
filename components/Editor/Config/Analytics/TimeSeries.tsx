@@ -1,9 +1,9 @@
 // This whole file is fked. Refactor it when ya get a chance.
 // Everything works perfectly, it's just messy -- am new to chart.js
-import { useEffect, useRef, useMemo } from 'react'
-import { Box, VStack, Heading, useColorModeValue, HStack, Text, Spinner } from '@chakra-ui/react'
+import { Box, Heading, HStack, Spinner, Text, useColorModeValue, VStack } from '@chakra-ui/react'
 import Chart from 'chart.js/auto'
 import { GetTimeSeriesDataReturnData } from 'controllers/analytics'
+import { useEffect, useMemo, useRef } from 'react'
 
 type TimeSeriesProps = { timeSeries: GetTimeSeriesDataReturnData | undefined }
 

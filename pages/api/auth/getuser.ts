@@ -1,6 +1,5 @@
-import { NextApiRequest, NextApiResponse } from 'next'
-
 import { getPublishedKyteFromId, getUserFromSession } from 'controllers/getuser'
+import { NextApiRequest, NextApiResponse } from 'next'
 import { TUser } from 'types/user'
 
 type GetUserRes = {

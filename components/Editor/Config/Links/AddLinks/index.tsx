@@ -1,10 +1,8 @@
-import { useState } from 'react'
-
 import { Button, HStack } from '@chakra-ui/react'
-
+import { useState } from 'react'
 import { TUser } from 'types/user'
-import LinkModal from '../LinkModal'
 
+import LinkModal from '../LinkModal'
 import NoLinks from './NoLinks'
 
 type AddLinksProps = {

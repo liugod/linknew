@@ -1,5 +1,4 @@
-import { Modal, ModalOverlay, ModalContent } from '@chakra-ui/react'
-
+import { Modal, ModalContent, ModalOverlay } from '@chakra-ui/react'
 import { TUser } from 'types/user'
 
 import AddIcon from './AddIcon'

@@ -1,7 +1,7 @@
 import { Box, Center, VStack } from '@chakra-ui/react'
-
-import { TUser } from 'types/user'
 import { THEMES } from 'consts/themes'
+import { TUser } from 'types/user'
+
 import Icons from '../Kyte/Icons/Icons'
 import Links from '../Kyte/Links/Links'
 import UserData from '../Kyte/UserData'

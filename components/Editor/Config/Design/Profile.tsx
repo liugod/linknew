@@ -1,26 +1,24 @@
-import { useState, ChangeEvent } from 'react'
-
 import {
-  Box,
-  Heading,
-  VStack,
-  Input,
   Avatar,
-  Spinner,
+  Box,
   Center,
+  Heading,
+  Input,
+  Spinner,
+  Stack,
   Text,
   useToast,
-  Stack,
+  VStack,
 } from '@chakra-ui/react'
-
-import { TUser } from 'types/user'
-import { uploadFile } from 'lib/uploadfile'
-import { trackClientEvent } from 'lib/posthog'
 import { PosthogEvents } from 'consts/posthog'
+import { trackClientEvent } from 'lib/posthog'
+import { uploadFile } from 'lib/uploadfile'
+import { ChangeEvent, useState } from 'react'
+import { TUser } from 'types/user'
 
 const Profile = ({ user, setUser }: { user: TUser; setUser: (user: TUser) => void }) => {
   const toast = useToast()
-  const [loading, setLoading] = useState<Boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false)
 
   const uploadImage = async (e: ChangeEvent<HTMLInputElement>) => {
     setLoading(true)

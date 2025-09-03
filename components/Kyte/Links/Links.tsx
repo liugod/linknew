@@ -1,6 +1,6 @@
 import { VStack } from '@chakra-ui/react'
-
 import { TLink, TUser } from 'types/user'
+
 import Link from './Link'
 
 type Props = { user: TUser; isPreview?: boolean }

@@ -1,12 +1,11 @@
+import { Box, Button, Heading, HStack, Text, VStack } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
-
-import { Button, Heading, VStack, Text, HStack, Box } from '@chakra-ui/react'
 import { AiOutlinePlus } from 'react-icons/ai'
+import { TUser } from 'types/user'
 
 import DomainInput from './DomainInput'
 import EditUsername from './EditUsername'
 import RecordTable from './RecordTable'
-import { TUser } from 'types/user'
 
 const AddDomain = ({ user, setUser }: { user: TUser; setUser: (user: TUser) => void }) => {
   const [domain, setDomain] = useState<string>('')

@@ -1,8 +1,7 @@
-import { Flex, Box, Text, Spacer, Center, Image } from '@chakra-ui/react'
-import { BsPencilSquare } from 'react-icons/bs'
-
-import { FaIconKey, TLink } from 'types/user'
+import { Box, Center, Flex, Image, Spacer, Text } from '@chakra-ui/react'
 import DynamicIcon from 'components/DynamicIcon'
+import { BsPencilSquare } from 'react-icons/bs'
+import { FaIconKey, TLink } from 'types/user'
 
 const Link = ({ linkData }: { linkData: TLink }) => {
   const { color, emoji } = linkData

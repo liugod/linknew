@@ -1,4 +1,4 @@
-import { Spacer, HStack, Container, Link, Button, Flex, Image } from '@chakra-ui/react'
+import { Button, Container, Flex, HStack, Image, Link, Spacer } from '@chakra-ui/react'
 import { PosthogEvents } from 'consts/posthog'
 import { trackClientEvent } from 'lib/posthog'
 import { useRouter } from 'next/router'

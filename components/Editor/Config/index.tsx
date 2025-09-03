@@ -1,6 +1,5 @@
-import { Box, Tabs, TabList, Tab, TabPanel, TabPanels, Text } from '@chakra-ui/react'
+import { Box, Tab, TabList, TabPanel, TabPanels, Tabs, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-
 import { TUser } from 'types/user'
 
 import Analyitcs from './Analytics'

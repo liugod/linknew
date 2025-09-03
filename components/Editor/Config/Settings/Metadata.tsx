@@ -1,5 +1,4 @@
-import { Heading, VStack, Text, Input } from '@chakra-ui/react'
-
+import { Heading, Input, Text, VStack } from '@chakra-ui/react'
 import { TUser } from 'types/user'
 
 type MetadataProps = {

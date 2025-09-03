@@ -1,0 +1,10 @@
+{
+  "functions": {
+    "pages/api/images/createblurpfp.js": {
+      "maxDuration": 10
+    },
+    "pages/api/images/getuploadurl.js": {
+      "maxDuration": 5
+    }
+  }
+}

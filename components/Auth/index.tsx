@@ -1,27 +1,25 @@
-import { useEffect, useState } from 'react'
-
 import {
+  Box,
   Button,
+  Center,
   Heading,
   HStack,
-  VStack,
-  Text,
-  Box,
   Input,
-  Center,
-  useToast,
   Link,
+  Text,
+  useToast,
+  VStack,
 } from '@chakra-ui/react'
-import { debounce } from 'lodash'
-import { signIn } from 'next-auth/react'
-
-import { getBaseURL } from 'lib/utils'
-import { IoIosArrowBack } from 'react-icons/io'
-import { FaArrowRight, FaGithub, FaGoogle } from 'react-icons/fa'
-import { NextSeo } from 'next-seo'
-import Image from 'next/image'
-import { trackClientEvent } from 'lib/posthog'
 import { PosthogEvents } from 'consts/posthog'
+import { trackClientEvent } from 'lib/posthog'
+import { getBaseURL } from 'lib/utils'
+import { debounce } from 'lodash'
+import Image from 'next/image'
+import { signIn } from 'next-auth/react'
+import { NextSeo } from 'next-seo'
+import { useEffect, useState } from 'react'
+import { FaArrowRight, FaGithub, FaGoogle } from 'react-icons/fa'
+import { IoIosArrowBack } from 'react-icons/io'
 
 const PROVIDERS = [
   { name: 'Google', icon: FaGoogle, color: 'blue.500' },
