@@ -1,4 +1,4 @@
-import { getUserFromNextAuth } from 'controllers/getuser'
+import { getUserFromSession } from 'controllers/getuser'
 import prisma from 'lib/prisma'
 import { NextApiRequest, NextApiResponse } from 'next'
 
@@ -18,7 +18,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<SqlExecutionRes
 
   try {
     // Check authentication
-    const { user, error: authError } = await getUserFromNextAuth(req, res)
+    const { user, error: authError } = await getUserFromSession(req)
     if (!user || authError) {
       return res.status(401).json({ success: false, error: 'Unauthorized' })
     }

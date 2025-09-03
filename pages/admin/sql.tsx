@@ -22,9 +22,10 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { useSession } from 'next-auth/react'
 import { NextSeo } from 'next-seo'
-import React, { useEffect, useState } from 'react'
+import { UserContext } from 'pages/_app'
+import React, { useContext, useEffect, useState } from 'react'
+import { TUserContext } from 'types/user'
 
 type SqlResult = {
   success: boolean
@@ -38,18 +39,16 @@ const SqlAdminPage = () => {
   const [query, setQuery] = useState('')
   const [result, setResult] = useState<SqlResult | null>(null)
   const [isLoading, setIsLoading] = useState(false)
-  const { data: session, status } = useSession()
+  const { user } = useContext(UserContext) as TUserContext
   const router = useRouter()
   const toast = useToast()
 
   useEffect(() => {
-    if (status === 'loading') return // Still loading
-
-    if (!session) {
-      router.push('/auth/signin')
+    if (!user) {
+      router.push('/')
       return
     }
-  }, [session, status, router])
+  }, [user, router])
 
   const executeQuery = async () => {
     if (!query.trim()) {
@@ -117,7 +116,7 @@ const SqlAdminPage = () => {
     setResult(null)
   }
 
-  if (status === 'loading') {
+  if (!user) {
     return (
       <Container maxW="container.xl" py={8}>
         <VStack spacing={4}>
@@ -126,10 +125,6 @@ const SqlAdminPage = () => {
         </VStack>
       </Container>
     )
-  }
-
-  if (!session) {
-    return null // Will redirect in useEffect
   }
 
   return (
