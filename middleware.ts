@@ -11,14 +11,14 @@ async function middleware(request: NextRequest) {
 
   // get host name [aleem.com]
   const hostname = request.headers.get('host')
-  if (!hostname) return NextResponse.redirect('https://tradlink.com')
+  if (!hostname) return NextResponse.redirect('https://link.bigai.app')
 
   // get our base url [https://tradlink.com]
   const BASE_URL = getBaseURL(hostname)
 
   // if the domain is a customdomain, and it's root path, redirect to tradlink.com
   if (CUSTOM_DOMAINS.includes(hostname) && pathname === '/') {
-    return NextResponse.redirect('https://tradlink.com')
+    return NextResponse.redirect('https://link.bigai.app')
   }
 
   // if the domain is a host, treat it as normal
@@ -46,7 +46,7 @@ async function middleware(request: NextRequest) {
     if (!user.success || !user.username) {
       console.log('no user found')
       console.log(user)
-      return NextResponse.redirect('https://tradlink.com')
+      return NextResponse.redirect('https://link.bigai.app')
     }
 
     url.pathname = `/${user.username}`
