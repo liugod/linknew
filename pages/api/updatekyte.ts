@@ -1,7 +1,6 @@
-import { NextApiRequest, NextApiResponse } from 'next'
-
 import { updateDraftKyte } from 'controllers/editkyte'
 import { getUserFromNextAuth } from 'controllers/getuser'
+import { NextApiRequest, NextApiResponse } from 'next'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (!req.body.draftData) return res.status(400).json({ error: 'No draft data found' })

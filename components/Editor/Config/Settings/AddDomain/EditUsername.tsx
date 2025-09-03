@@ -1,11 +1,9 @@
-import { useCallback, useEffect, useState } from 'react'
-
-import { VStack, Text, InputGroup, InputLeftAddon, Input, Box } from '@chakra-ui/react'
-import { debounce } from 'lodash'
-
-import { TUser } from 'types/user'
-import { trackClientEvent } from 'lib/posthog'
+import { Box, Input, InputGroup, InputLeftAddon, Text, VStack } from '@chakra-ui/react'
 import { PosthogEvents } from 'consts/posthog'
+import { trackClientEvent } from 'lib/posthog'
+import { debounce } from 'lodash'
+import { useCallback, useEffect, useState } from 'react'
+import { TUser } from 'types/user'
 
 const EditUsername = ({ user, setUser }: { user: TUser; setUser: (user: TUser) => void }) => {
   const [username, setUsername] = useState('???') as any

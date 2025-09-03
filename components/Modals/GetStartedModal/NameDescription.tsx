@@ -1,6 +1,7 @@
 import { HStack, Input, Text, VStack } from '@chakra-ui/react'
 import { BiCamera } from 'react-icons/bi'
 import { TUser } from 'types/user'
+
 import SelectAvatar from './SelectAvatar'
 
 type NameDescriptionProps = {

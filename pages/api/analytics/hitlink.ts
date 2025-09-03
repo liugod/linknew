@@ -1,10 +1,9 @@
-import { NextApiRequest, NextApiResponse } from 'next'
-import { z } from 'zod'
-import { Device } from 'types/utils'
-
+import { PosthogEvents } from 'consts/posthog'
 import { AddLinkHit, AddPageHit } from 'controllers/analytics'
 import { trackServerEvent } from 'lib/posthog'
-import { PosthogEvents } from 'consts/posthog'
+import { NextApiRequest, NextApiResponse } from 'next'
+import { Device } from 'types/utils'
+import { z } from 'zod'
 
 const RequestSchema = z.object({
   kyteId: z.string(),

@@ -1,5 +1,5 @@
-import { NextApiRequest, NextApiResponse } from 'next'
 import { validateUsername } from 'controllers/validations'
+import { NextApiRequest, NextApiResponse } from 'next'
 
 type ValidateUsernameRes = { success?: boolean; error?: string }
 

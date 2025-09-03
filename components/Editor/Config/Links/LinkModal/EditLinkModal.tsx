@@ -1,26 +1,24 @@
 import {
-  Button,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
-  VStack,
-  Input,
   Box,
-  HStack,
-  Text,
-  Link,
+  Button,
   Center,
-  useToast,
+  HStack,
   Image,
+  Input,
+  Link,
+  ModalBody,
+  ModalCloseButton,
+  ModalFooter,
+  ModalHeader,
+  Text,
+  useToast,
+  VStack,
 } from '@chakra-ui/react'
-
+import DynamicIcon from 'components/DynamicIcon'
+import { PosthogEvents } from 'consts/posthog'
+import { trackClientEvent } from 'lib/posthog'
 import { GrAddCircle } from 'react-icons/gr'
 import { FaIconKey, TLink, TUser } from 'types/user'
-
-import DynamicIcon from 'components/DynamicIcon'
-import { trackClientEvent } from 'lib/posthog'
-import { PosthogEvents } from 'consts/posthog'
 
 type EditLinkModalProps = {
   user: TUser

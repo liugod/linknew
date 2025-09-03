@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react'
-
 import {
   Box,
   Heading,
@@ -13,6 +11,7 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react'
+import { useEffect, useState } from 'react'
 import { BiCheckCircle, BiCopy } from 'react-icons/bi'
 import { FaEnvelope, FaLinkedin, FaTwitter, FaWhatsapp } from 'react-icons/fa'
 

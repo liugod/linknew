@@ -1,9 +1,9 @@
-import { Button, Heading, VStack, Text, Input, useToast } from '@chakra-ui/react'
+import { Button, Heading, Input, Text, useToast, VStack } from '@chakra-ui/react'
 import { debounce } from 'lodash'
 import { KyteProdContext } from 'pages/_app'
 import { useContext, useState } from 'react'
-
 import { TKyteProdContext, TUser } from 'types/user'
+
 import ChangeEmailModal from './ChangeEmailModal'
 
 type DangerProps = {

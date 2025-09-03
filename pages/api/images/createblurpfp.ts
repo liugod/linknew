@@ -1,5 +1,5 @@
-import { NextApiRequest, NextApiResponse } from 'next'
 import jimp from 'jimp'
+import { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const imageURL = req.body.imageurl as string

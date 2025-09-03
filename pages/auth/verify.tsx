@@ -1,4 +1,4 @@
-import { Button, Center, Heading, HStack, Image, Link, Text, VStack, Box } from '@chakra-ui/react'
+import { Box, Button, Center, Heading, HStack, Image, Link, Text, VStack } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { IoIosArrowBack } from 'react-icons/io'
 

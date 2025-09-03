@@ -1,11 +1,8 @@
-import { useEffect, useState } from 'react'
-
-import { Box, Heading, Text, VStack, Center, SimpleGrid } from '@chakra-ui/react'
-import { FiChevronRight, FiChevronLeft } from 'react-icons/fi'
-
-import { TUser } from 'types/user'
-
+import { Box, Center, Heading, SimpleGrid, Text, VStack } from '@chakra-ui/react'
 import { COLORS, FONTS } from 'consts/fonts'
+import { useEffect, useState } from 'react'
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
+import { TUser } from 'types/user'
 
 type FontProps = {
   user: TUser

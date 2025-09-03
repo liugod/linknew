@@ -1,12 +1,10 @@
-import { ChangeEvent, useState } from 'react'
-
 import { Box, Image, Spinner, Text, useToast, VStack } from '@chakra-ui/react'
-
-import { TUser } from 'types/user'
-import { uploadFile } from 'lib/uploadfile'
-import { trackClientEvent } from 'lib/posthog'
 import { PosthogEvents } from 'consts/posthog'
+import { trackClientEvent } from 'lib/posthog'
+import { uploadFile } from 'lib/uploadfile'
+import { ChangeEvent, useState } from 'react'
 import { BiCamera } from 'react-icons/bi'
+import { TUser } from 'types/user'
 
 type GetStartedModalProps = {
   user: TUser

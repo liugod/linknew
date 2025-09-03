@@ -1,6 +1,6 @@
 import { CUSTOM_DOMAINS, HOSTS } from 'consts/middleware'
-import { NextRequest, NextResponse } from 'next/server'
 import { getBaseURL } from 'lib/utils'
+import { NextRequest, NextResponse } from 'next/server'
 
 async function middleware(request: NextRequest) {
   // clone the request url

@@ -1,11 +1,10 @@
-import { useState } from 'react'
-
 import { Flex } from '@chakra-ui/react'
 import GetStartedModal from 'components/Modals/GetStartedModal'
+import { useState } from 'react'
+import { TUser } from 'types/user'
 
 import Config from './Config'
 import Preview from './Preview'
-import { TUser } from 'types/user'
 
 type EditorProps = { user: TUser; setUser: (user: TUser) => void; kyteProd: TUser; route: string }
 

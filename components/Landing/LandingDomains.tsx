@@ -1,4 +1,4 @@
-import { VStack, Heading, SimpleGrid, Center, Text, HStack, Button } from '@chakra-ui/react'
+import { Button, Center, Heading, HStack, SimpleGrid, Text, VStack } from '@chakra-ui/react'
 import { LANDING_DOMAINS } from 'consts/landingpage'
 
 const LandingDomains = () => {
