@@ -1,6 +1,5 @@
-import { CUSTOM_DOMAINS, HOSTS } from 'consts/middleware'
+import { CUSTOM_DOMAINS, HOSTS } from './consts/middleware'
 import { NextRequest, NextResponse } from 'next/server'
-import { getBaseURL } from 'lib/utils'
 
 async function middleware(request: NextRequest) {
   // clone the request url
@@ -13,8 +12,21 @@ async function middleware(request: NextRequest) {
   const hostname = request.headers.get('host')
   if (!hostname) return NextResponse.redirect('https://link.bigai.app')
 
-  // get our base url [https://tradlink.com]
-  const BASE_URL = getBaseURL(hostname)
+  // get our base url [https://tradlink.com] - Edge-compatible version
+  let BASE_URL: string
+  if (!hostname || hostname.includes('vercel.app')) {
+    if (!process.env.NEXT_PUBLIC_VERCEL_URL) {
+      BASE_URL = 'https://link.bigai.app'
+    } else if (process.env.NEXT_PUBLIC_VERCEL_URL.includes('localhost')) {
+      BASE_URL = 'http://localhost:3000'
+    } else {
+      BASE_URL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+    }
+  } else if (hostname.includes('localhost')) {
+    BASE_URL = 'http://localhost:3000'
+  } else {
+    BASE_URL = `https://${hostname}`
+  }
 
   // if the domain is a customdomain, and it's root path, redirect to tradlink.com
   if (CUSTOM_DOMAINS.includes(hostname) && pathname === '/') {
