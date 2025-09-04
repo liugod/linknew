@@ -1,36 +1,80 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
+/**
+ * API路由：获取Cloudflare Images直接上传URL
+ * 处理图片上传前的预签名URL生成
+ */
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
-    // Check if required environment variables are present
+    // 增强环境变量检查和日志记录
     if (!process.env.CLOUDFLARE_ACCOUNT || !process.env.CLOUDFLARE_TOKEN) {
+      console.error('Cloudflare配置缺失:', {
+        hasAccount: !!process.env.CLOUDFLARE_ACCOUNT,
+        hasToken: !!process.env.CLOUDFLARE_TOKEN,
+        nodeEnv: process.env.NODE_ENV
+      })
       return res.status(500).json({
         error: 'Missing Cloudflare configuration',
         uploadURL: null,
       })
     }
 
+    console.log('请求Cloudflare上传URL...', {
+      account: process.env.CLOUDFLARE_ACCOUNT.substring(0, 8) + '...',
+      timestamp: new Date().toISOString()
+    })
+
     const response = await fetch(
       `https://api.cloudflare.com/client/v4/accounts/${process.env.CLOUDFLARE_ACCOUNT}/images/v2/direct_upload`,
       {
         method: 'POST',
-        headers: { Authorization: `Bearer ${process.env.CLOUDFLARE_TOKEN}` },
+        headers: { 
+          Authorization: `Bearer ${process.env.CLOUDFLARE_TOKEN}`,
+          'Content-Type': 'application/json'
+        },
+        // 添加请求体配置以解决权限问题
+        body: JSON.stringify({
+          requireSignedURLs: false,
+          metadata: {
+            source: 'linknew-app',
+            timestamp: Date.now().toString()
+          }
+        })
       }
     )
 
     const data = await response.json()
 
-    // Check if the Cloudflare API call was successful
+    // 详细的错误日志记录
     if (!response.ok || !data.success || !data.result) {
+      console.error('Cloudflare API错误详情:', {
+        status: response.status,
+        statusText: response.statusText,
+        success: data.success,
+        errors: data.errors,
+        messages: data.messages,
+        result: data.result
+      })
+      
+      // 针对403错误的特殊处理
+      if (response.status === 403) {
+        return res.status(403).json({
+          error: 'Cloudflare Images权限不足 - 请检查API Token权限配置',
+          details: data.errors?.[0]?.message || '权限被拒绝',
+          uploadURL: null,
+        })
+      }
+      
       return res.status(500).json({
-        error: 'Failed to get upload URL from Cloudflare',
+        error: `Cloudflare API Error: ${data.errors?.[0]?.message || 'Unknown error'}`,
         uploadURL: null,
       })
     }
 
+    console.log('上传URL生成成功')
     res.status(200).json(data.result)
   } catch (error) {
-    console.error('Error in getuploadurl:', error)
+    console.error('getuploadurl内部错误:', error)
     res.status(500).json({
       error: 'Internal server error',
       uploadURL: null,
