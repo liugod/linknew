@@ -21,20 +21,20 @@ export async function uploadFile(file: File, isPfp?: boolean): Promise<UploadFil
       return { error: '不支持的文件格式，仅支持 JPEG、PNG、GIF、WebP' }
     }
 
-    console.log('开始上传流程:', { 
-      fileName: file.name, 
+    console.log('开始上传流程:', {
+      fileName: file.name,
       fileSize: file.size,
-      fileType: file.type 
+      fileType: file.type,
     })
-    
+
     // 步骤1: 获取上传URL
     const getuploadurl = await fetch('/api/images/getuploadurl', {
       method: 'GET',
       headers: {
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+      },
     })
-    
+
     const response = await getuploadurl.json()
 
     // 检查API调用是否成功
@@ -42,7 +42,7 @@ export async function uploadFile(file: File, isPfp?: boolean): Promise<UploadFil
       console.error('获取上传URL失败:', {
         status: getuploadurl.status,
         error: response.error,
-        hasUploadURL: !!response.uploadURL
+        hasUploadURL: !!response.uploadURL,
       })
       return { error: response.error || '获取上传URL失败' }
     }
@@ -53,40 +53,43 @@ export async function uploadFile(file: File, isPfp?: boolean): Promise<UploadFil
     // 步骤2: 上传文件到Cloudflare
     const formData = new FormData()
     formData.append('file', file)
-    
-    // 添加元数据
-    formData.append('metadata', JSON.stringify({
-      filename: file.name,
-      source: 'linknew',
-      uploadTime: new Date().toISOString()
-    }))
 
-    const upload = await fetch(uploadURL, { 
-      method: 'POST', 
+    // 添加元数据
+    formData.append(
+      'metadata',
+      JSON.stringify({
+        filename: file.name,
+        source: 'linknew',
+        uploadTime: new Date().toISOString(),
+      })
+    )
+
+    const upload = await fetch(uploadURL, {
+      method: 'POST',
       body: formData,
       // 添加超时和重试机制
-      signal: AbortSignal.timeout(60000) // 60秒超时
+      signal: AbortSignal.timeout(60000), // 60秒超时
     })
-    
+
     const uploadResponse = await upload.json()
-    
-    console.log('上传响应:', { 
-      success: uploadResponse.success, 
+
+    console.log('上传响应:', {
+      success: uploadResponse.success,
       hasResult: !!uploadResponse.result,
       errors: uploadResponse.errors,
-      status: upload.status
+      status: upload.status,
     })
 
     // 处理上传失败
     if (!uploadResponse.success) {
       const errorMessage = uploadResponse.errors?.[0]?.message || '上传失败'
       console.error('Cloudflare上传失败:', uploadResponse.errors)
-      
+
       // 特殊处理403错误
       if (upload.status === 403) {
         return { error: 'Cloudflare Images权限不足，请检查域名和API配置' }
       }
-      
+
       return { error: errorMessage }
     }
 
@@ -122,20 +125,20 @@ export async function uploadFile(file: File, isPfp?: boolean): Promise<UploadFil
     }
   } catch (error) {
     console.error('uploadFile错误:', error)
-    
+
     // 提供具体错误信息
     if (error instanceof TypeError && error.message.includes('fetch')) {
       return { error: '网络错误：请检查网络连接' }
     }
-    
-    if (error.name === 'TimeoutError') {
+
+    if (error instanceof Error && error.name === 'TimeoutError') {
       return { error: '上传超时：文件过大或网络较慢' }
     }
-    
-    if (error.name === 'AbortError') {
+
+    if (error instanceof Error && error.name === 'AbortError') {
       return { error: '上传被取消' }
     }
-    
+
     return { error: '上传失败：网络或服务器错误' }
   }
 }
